@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle-X 产品介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #4a5568;
+            margin: 1.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 1.2rem;
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .emphasis {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        li {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #718096;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            p, li { font-size: 1rem; }
+            .slide-content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 0: 封面 -->
+        <div class="slide active">
+            <div class="slide-content">
+                <div class="logo">Oracle-X</div>
+                <h1>加密货币交易的决策基础设施</h1>
+                <p class="subtitle">在交易决策的关键时刻，让理性拉住冲动</p>
+            </div>
+        </div>
+
+        <!-- Slide 1: 开场场景 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>交易者的困境</h2>
+                <p>想象这样一个场景：</p>
+                <p>一位交易者盯着 Binance 的 K 线图，BTC 刚刚突破关键阻力位，社群里所有人都在喊"冲"。手指悬在"做多"按钮上方，心跳加速。</p>
+                <p class="highlight">三秒后，按下了按钮。</p>
+                <p class="highlight">十分钟后，一根巨大的上影线将其钉在了山顶。</p>
+                <p style="margin-top: 2rem;">这个场景每天都在发生。问题不在于缺乏知识——交易者可能读过无数技术分析书籍，了解 RSI、MACD、布林带。</p>
+                <p class="emphasis">真正的问题是：在最需要理性的那三秒钟，没有人拉住他们。</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Oracle-X 是什么 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Oracle-X：交易前顾问</h2>
+                <h3>不是自动交易机器人</h3>
+                <p>Oracle-X 走的是一条完全不同的路：<span class="highlight">成为交易者的决策顾问</span>。</p>
+                
+                <h3>核心功能</h3>
+                <ul>
+                    <li>在每个交易决策前的<span class="highlight">十秒内</span>提供：</li>
+                    <li>当前市场的技术面状况分析</li>
+                    <li>交易的风险收益比计算</li>
+                    <li>基于用户交易风格的建议</li>
+                </ul>
+                
+                <h3>核心理念</h3>
+                <p class="emphasis">决策权永远在用户手中。Oracle-X 只确保按下按钮之前，已经看过完整的、客观的、没有情绪的分析报告。</p>
+                <p>它是一个<span class="highlight">永远在线、永远冷静、永远不会 FOMO</span> 的交易搭档。</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: 决策链条定位 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>产品在交易决策链中的定位</h2>
+                
+                <div style="margin: 2rem 0;">
+                    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; border-left: 4px solid #667eea;">
+                        <h3 style="margin-top: 0; text-align: center; color: #2d3748;">完整交易决策链条</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin: 2rem 0; flex-wrap: wrap; gap: 0.5rem;">
+                            <div style="flex: 1; min-width: 120px; text-align: center; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <strong style="color: #667eea;">信息收集</strong>
+                            </div>
+                            <div style="color: #cbd5e0; font-size: 1.5rem;">→</div>
+                            <div style="flex: 1; min-width: 120px; text-align: center; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <strong style="color: #667eea;">风险评估</strong>
+                            </div>
+                            <div style="color: #cbd5e0; font-size: 1.5rem;">→</div>
+                            <div style="flex: 1; min-width: 120px; text-align: center; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <strong style="color: #667eea;">决策判断</strong>
+                            </div>
+                            <div style="color: #cbd5e0; font-size: 1.5rem;">→</div>
+                            <div style="flex: 1; min-width: 120px; text-align: center; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <strong style="color: #667eea;">执行交易</strong>
+                            </div>
+                            <div style="color: #cbd5e0; font-size: 1.5rem;">→</div>
+                            <div style="flex: 1; min-width: 120px; text-align: center; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <strong style="color: #667eea;">持仓管理</strong>
+                            </div>
+                            <div style="color: #cbd5e0; font-size: 1.5rem;">→</div>
+                            <div style="flex: 1; min-width: 120px; text-align: center; padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                <strong style="color: #667eea;">复盘归因</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 12px; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                        <h3 style="margin-top: 0; color: white; border: none; padding: 0; font-size: 1.8rem;">Oracle-X</h3>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin: 1rem 0;">交易前 · 人做决策</p>
+                        <p style="font-size: 1.4rem; font-weight: 600; color: #ffd89b; margin-top: 1.5rem;">"你应不应该买？"</p>
+                        <ul style="margin-top: 1.5rem;">
+                            <li style="color: rgba(255,255,255,0.95);">辅助决策分析</li>
+                            <li style="color: rgba(255,255,255,0.95);">用户保留控制权</li>
+                            <li style="color: rgba(255,255,255,0.95);">智能建议系统</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem; border-radius: 12px; color: white; box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);">
+                        <h3 style="margin-top: 0; color: white; border: none; padding: 0; font-size: 1.8rem;">NOFA.AI</h3>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin: 1rem 0;">交易中 · AI 做决策</p>
+                        <p style="font-size: 1.4rem; font-weight: 600; color: #ffd89b; margin-top: 1.5rem;">"AI 替你买卖"</p>
+                        <ul style="margin-top: 1.5rem;">
+                            <li style="color: rgba(255,255,255,0.95);">自动化交易执行</li>
+                            <li style="color: rgba(255,255,255,0.95);">AI 完全控制</li>
+                            <li style="color: rgba(255,255,255,0.95);">智能交易系统</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: 视觉监听技术 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>核心技术：视觉监听</h2>
+                
+                <h3>工作原理</h3>
+                <ul>
+                    <li>Chrome 浏览器插件形态</li>
+                    <li>用户按下快捷键 → 截取当前屏幕</li>
+                    <li>多模态 AI 一秒内识别：交易平台、交易对、交易类型</li>
+                    <li>实时拉取市场数据 + 计算十几个关键技术指标</li>
+                    <li>AI 综合研判 → 五秒内弹出完整分析报告</li>
+                </ul>
+                
+                <h3>技术优势</h3>
+                <p class="highlight">基于视觉识别而非 API 对接</p>
+                <ul>
+                    <li>无需为每个平台写适配代码</li>
+                    <li>支持所有交易平台：Binance、OKX、Bybit、Uniswap、GMX、Jupiter</li>
+                    <li>新平台出现时自动兼容</li>
+                </ul>
+                
+                <p class="emphasis">一个插件，覆盖整个加密货币交易世界。</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: 差异化优势 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>为什么是 Oracle-X</h2>
+                
+                <h3>与现有工具的对比</h3>
+                
+                <p><span class="highlight">TradingView</span> - 极其强大，但是"用户去找它"的工具</p>
+                <ul>
+                    <li>需要手动打开、输入交易对、添加指标、解读图表</li>
+                    <li>在关键的三秒钟——手指已经悬在按钮上方时——用户不会去打开它</li>
+                </ul>
+                
+                <p><span class="highlight">交易信号群</span> - 无法判断可信度</p>
+                <ul>
+                    <li>一百个人喊多，谁是认真分析，谁是已经建仓等待接盘？</li>
+                </ul>
+                
+                <h3>Oracle-X 的核心价值</h3>
+                <p class="emphasis">在交易决策的最后一公里，把专业分析无摩擦地送到面前。</p>
+                <ul>
+                    <li>不是用户去找分析，而是<span class="highlight">分析来找用户</span></li>
+                    <li>不是在有空的时候，而是在<span class="highlight">最需要的时候</span></li>
+                    <li>学习用户的交易风格，提供<span class="highlight">个性化建议</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: 未来愿景 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>未来愿景</h2>
+                
+                <h3>当前阶段：MVP</h3>
+                <ul>
+                    <li>视觉监听</li>
+                    <li>实时分析</li>
+                    <li>个性化建议</li>
+                </ul>
+                
+                <h3>长期目标：加密货币交易的决策基础设施</h3>
+                <ul>
+                    <li><span class="highlight">持仓监控</span>：持续监控市场变化，风险骤增时主动提醒</li>
+                    <li><span class="highlight">交易复盘</span>：记录每笔交易的决策过程和结果，帮助发现认知盲区</li>
+                    <li><span class="highlight">Web3 生态整合</span>：链上巨鲸动向、协议 TVL 变化、治理提案影响</li>
+                    <li><span class="highlight">智能浓缩</span>：将所有信息浓缩成可立刻理解的建议</li>
+                </ul>
+                
+                <h3>不变的原则</h3>
+                <p class="emphasis">Oracle-X 永远不会替用户做决定</p>
+                <p>使命不是取代思考，而是让每一次思考都建立在<span class="highlight">更完整的信息、更冷静的分析</span>之上。</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: 总结 -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 style="text-align: center; border: none; padding: 0;">在按下按钮之前</h2>
+                <h1 style="text-align: center; margin-top: 2rem;">让 Oracle-X 先看一眼</h1>
+                
+                <div style="margin-top: 4rem; text-align: center;">
+                    <p style="font-size: 1.5rem; color: #718096;">
+                        更理性的决策<br>
+                        更冷静的分析<br>
+                        更好的交易结果
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">→</button>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicator" id="indicators"></div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const indicators = document.getElementById('indicators');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Create indicators
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'indicator-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            indicators.appendChild(dot);
+        }
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            // Update indicators
+            document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update navigation buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            updateSlides();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>
